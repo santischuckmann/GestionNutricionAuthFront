@@ -1,0 +1,8 @@
+{
+  "development": { 
+    "baseUrl": "https://localhost:7027/api/User"
+  },
+  "production": {
+    "baseUrl": "https://localhost:7027/api/User"
+  }
+}

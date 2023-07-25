@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css" /> 
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Inicie sesión en el sistema de gestión</h1>
+    <div class="login-box">
+      <form id="form">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" placeholder="Nombre de usuario"/>
+        <label for="username">Contraseña:</label>
+        <input type="password" id="password" placeholder="Contraseña"/>
+      </form>
+    </div>
+    <a href="#">No tenes cuenta? crea una aca</a>
+    <p id="stateText"></p>
+  </div>
+  <script type="module">
+    async function submitForm() {
+      const formData = new FormData(document.getElementById("form"));
+      const errorText = document.getElementById("error")
+
+      try {
+        const response = await fetch(`${endpoints.development.baseUrl}/Login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(Object.fromEntries(formData)),
+        })
+
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        const data = response.json()
+
+        if (!data.token) throw new Error("An error ocurred");
+
+        localStorage.setItem('token', data.token)
+      } catch (error) {
+        errorText.textContent = error.message
+      }
+    }
+  </script>
+</body>
+</html>

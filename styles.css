@@ -23,12 +23,12 @@
 
 .login-box {
   width: 200px;
-  height: 200px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: azure;
+  padding: 8px 0px;
 }
 
 .login-box form {
